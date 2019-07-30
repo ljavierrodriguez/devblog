@@ -1,0 +1,65 @@
+{% extends "rest_framework/base.html" %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'rest_framework/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'rest_framework/css/bootstrap-tweaks.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'rest_framework/css/prettify.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'rest_framework/css/default.css' %}" />
+<style>
+    .wrapper {
+        margin-top: 0px;
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+    window.drf = {
+        csrfHeaderName: "X-CSRFToken",
+        csrfToken: '{{ csrf_token }}'
+    };
+</script>
+<script src="/static/rest_framework/js/jquery-3.3.1.min.js"></script>
+<script src="/static/rest_framework/js/ajax-form.js"></script>
+<script src="/static/rest_framework/js/csrf.js"></script>
+<script src="/static/rest_framework/js/bootstrap.min.js"></script>
+<script src="/static/rest_framework/js/prettify-min.js"></script>
+<script src="/static/rest_framework/js/default.js"></script>
+<script>
+    $(document).ready(function () {
+        $('form').ajaxForm();
+    });
+</script>
+{% endblock %}
+
+{% block branding %}
+<a class="navbar-brand" href="{% url 'home' %}">4Geeks Academy</a>
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block title %}
+API REST Django
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron" style="background-image: url('{% static "images/4Geeks-academy.svg" %}')">
+    <h1 class="display-4">API REST Django!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+        featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+{% endblock %}
+
+{% block userlinks %}
+    {% if user.is_staff %}
+<li><a href="{% url 'admin:index' %}">Admin</a></li>
+    {% endif %}
+<li><a href="{% url 'home'%}">Home</a></li>
+<li><a href="{% url 'posts'%}">Posts</a></li>
+<li><a href="{% url 'portfolio'%}">Portfolio</a></li>
+{{ block.super }}
+{% endblock %}
